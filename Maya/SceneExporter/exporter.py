@@ -7,10 +7,10 @@ import maya.mel as mel
 
 
 LOG = logging.getLogger(__name__)
-LOG.setLevel(logging.INFO)
+LOG.setLevel(logging.DEBUG)
 
 
-def export(group_name, transform_nodes, export_dir):
+def export(group_name, transform_nodes, fbx_export_dir, json_export_dir):
 	"""
 
 	Parameters
@@ -22,24 +22,28 @@ def export(group_name, transform_nodes, export_dir):
 	export_nodes, json_scene_nodes = parse_objects(transform_nodes)
 
 	for node in export_nodes:
-		export_node_to_fbx(node, export_dir)
+		export_node_to_fbx(node, fbx_export_dir)
 
-	export_json_objects(export_dir, group_name, json_scene_nodes)
+	export_json_objects(json_export_dir, group_name, json_scene_nodes)
 
 
 def export_node_to_fbx(node, export_dir):
 	short_name = get_short_name(node)
 	LOG.info('Export {}.fbx'.format(node))
+	LOG.debug('Selecting only {}'.format(node))
 	cmds.select(node, replace=True)
 	fbx_path = os.path.join(export_dir, short_name + '.fbx').replace('\\', '/')
-	mel.eval('FBXExport -f "{}" -s;'.format(fbx_path))
+
+	# todo: Clear fbx export settings first?
+
+	cmds.file(fbx_path, force=True, options="v = 0", type="FBX export", exportSelected=True)
 
 
 def export_json_objects(export_dir, group_name, json_scene_nodes):
-	json_path = os.path.join(export_dir, group_name + '.sceneexport.json')
+	json_path = os.path.join(export_dir, group_name + '.SceneExport.json')
 
 	with open(json_path, 'w') as f:
-		json_dict = {'items': json_scene_nodes}
+		json_dict = {'name': group_name, 'items': json_scene_nodes}
 		json.dump(json_dict, f)
 
 
