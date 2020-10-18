@@ -10,8 +10,9 @@ The aim of this tool is to give artists the freedom to build scenes for game eng
 
 ## Bookshelf example
 
-In this example scene, there are multiple copies of the book model that all share the same shape node. The tool identifies this during export and only exports one FBX model for a book while storing the transform information for each instance in a JSON file called Bookshelf.SceneExport.json.
+In this example scene, there are multiple copies of the book model that all share the same shape node. The tool identifies this during export and only exports one FBX model for the book while storing the transform information for each instance in a JSON file called Bookshelf.SceneExport.json.
 
 ![Alt text](maya_ZWVmxWTqCC.png?raw=true "Exporting in Maya")
 
 ![Alt text](Unity_JgoSQkWuNY.png?raw=true "Importing in Unity")
+This Unity scene is made up of only 2 models.
