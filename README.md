@@ -4,11 +4,11 @@
 
 The Maya Scene Exporter handles exporting multiple objects to a game engine (e.g. Unity) as FBX and JSON files.
 
-Features
-1. All objects have there transform set to identify before export, while scene transform information is stored in a seperate JSON file.
-2. If multiple objects share the same shape, only one object will be exported.
-
 The aim of this tool is to give artists the freedom to build scenes for game engines inside of Maya instead of having to manually export each object and then build the scene in a seperate tool.
+
+Features
+1. Object transforms stored in JSON file and objects exportd as FBX with identiy transform.
+2. When multiple objects share the same shape, only one object is exported as an FBX.
 
 ## Example
 
