@@ -44,7 +44,7 @@ public class SceneImporterTool : EditorWindow
         using (StreamReader reader = new StreamReader(jsonFilepath))
         {
             string json = reader.ReadToEnd();
-            ItemGroup.CreateFromJSON(json);
+            itemGroup = ItemGroup.CreateFromJSON(json);
         }
 
         //
@@ -85,9 +85,21 @@ public class SceneImporterTool : EditorWindow
                 prefabCache.Add(item.fbx, prefab);
             }
 
-            GameObject instance = (GameObject)Instantiate(prefab, matrix.ExtractPosition(), matrix.ExtractRotation(), groupObj.transform);
-            instance.transform.localScale = matrix.ExtractScale();
+            //
+            // Convert from Maya's Right Handed to Unity's Left Handed Coordinate System
+            //
+            Vector3 pos = matrix.ExtractPosition();
+            var leftHandedPosition = new Vector3(-pos.x, pos.y, pos.z);
+
+            Quaternion rot = matrix.ExtractRotation();
+            var leftHandedRotation = new Quaternion(-rot.x, rot.y, rot.z, -rot.w);
+
+            //
+            // Instantiate instance
+            //
+            GameObject instance = (GameObject)Instantiate(prefab, leftHandedPosition, leftHandedRotation, groupObj.transform);
             instance.name = item.name;
+            instance.transform.localScale = matrix.ExtractScale();
         }
     }
 }
