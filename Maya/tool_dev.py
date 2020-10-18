@@ -17,7 +17,7 @@ def prepare_scripts(scripts_dir=None, relative_path=None, rebuild_qt_classes=Tru
 	"""
 	Clears scripts cache and generates qt classes under the base path.
 	If base path not set, the Maya app scripts dir will be used.
-	On Windows this is C:/<user>/rohin/Documents/maya/scripts
+	On Windows this is C:/Users/<user>/Documents/maya/scripts
 
 	:param scripts_dir: path where project scripts are. Defaults to the Maya app scripts dir.
 	:param relative_path: relative path to add to the scripts dir
@@ -46,9 +46,9 @@ def generate_qt_ui(paths):
 
 	:param paths: directories to search recursively for .ui files
 	"""
-	maya_path = os.path.join(os.environ['MAYA_LOCATION'], 'bin')
-	mayapy_path = os.path.join(maya_path, 'mayapy.exe')
-	pysid2uic_path = os.path.join(maya_path, 'pyside2-uic')
+	maya_path = os.path.join(os.environ['MAYA_LOCATION'], 'bin').replace('\\', '/')
+	mayapy_path = os.path.join(maya_path, 'mayapy.exe').replace('\\', '/')
+	pysid2uic_path = os.path.join(maya_path, 'pyside2-uic').replace('\\', '/')
 	CREATE_NO_WINDOW = 0x08000000
 
 	for path in paths:
@@ -56,10 +56,12 @@ def generate_qt_ui(paths):
 			for filename in files:
 				name, ext = os.path.splitext(filename)
 				if ext == '.ui':
-					ui_filepath = os.path.join(root, filename)
+					ui_filepath = os.path.join(root, filename).replace('\\', '/')
+					gen_filepath = os.path.join(root, name + '.py').replace('\\', '/')
 
 					LOG.info('Generating python class from ui file {}'.format(ui_filepath))
-					subprocess.call([mayapy_path, pysid2uic_path, ui_filepath], creationflags=CREATE_NO_WINDOW)
+					cmds = [mayapy_path, pysid2uic_path, '-o', gen_filepath, ui_filepath]
+					subprocess.call(cmds, creationflags=CREATE_NO_WINDOW)
 
 
 # clearPathSymbols() by Tyler Fox. Username tfox_TD. copied from

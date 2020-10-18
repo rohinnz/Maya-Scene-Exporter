@@ -3,28 +3,52 @@ import json
 import logging
 
 import maya.cmds as cmds
-import maya.mel as mel
 
 
 LOG = logging.getLogger(__name__)
 LOG.setLevel(logging.DEBUG)
 
 
-def export(group_name, transform_nodes, fbx_export_dir, json_export_dir):
+def export_selected_groups(fbx_export_dir, json_export_dir):
+	# todo: Ensure only groups are selected
+	selected_groups = cmds.ls(selection=True, long=True)
+	if not selected_groups:
+		cmds.warning('No groups selected')
+		return
+
+	for group in selected_groups:
+		export(group, fbx_export_dir, json_export_dir)
+
+	# Restore selection
+	cmds.select(selected_groups, replace=True)
+
+
+def export(group_full_path, fbx_export_dir, json_export_dir):
 	"""
 
 	Parameters
 	----------
-	group_name: Used in filename of scene export json file
-	transform_nodes: All nodes to process for exporting
-	export_dir: Directory to export fbx and json files.
+	group_full_path: Full path to the group containing child objects for export
+	fbx_export_dir: FBX Export dir.
+	json_export_dir: JSON Export dir.
 	"""
+	# todo: Ensure only mesh objects get returned
+	transform_nodes = cmds.listRelatives(group_full_path, children=True, fullPath=True) or []
+	if not transform_nodes:
+		cmds.warning('Group {} contains no child objects')
+		return
+
+	group_name = get_short_name(group_full_path)
+	LOG.info('Exporting objects for group ' + group_name)
+
 	export_nodes, json_scene_nodes = parse_objects(transform_nodes)
 
-	for node in export_nodes:
-		export_node_to_fbx(node, fbx_export_dir)
+	if fbx_export_dir:
+		for node in export_nodes:
+			export_node_to_fbx(node, fbx_export_dir)
 
-	export_json_objects(json_export_dir, group_name, json_scene_nodes)
+	if json_export_dir:
+		export_json_objects(json_export_dir, group_name, json_scene_nodes)
 
 
 def export_node_to_fbx(node, export_dir):
