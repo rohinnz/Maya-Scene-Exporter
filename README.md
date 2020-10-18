@@ -21,7 +21,12 @@ The Unity import tool imports the 2 FBX models and creates instances of each mod
 
 ## Install
 
-Copy SceneExporter folder into your Maya app dir.
+1. Copy SceneExporter folder into your Maya app dir.
 
 - Windows: \Users\<username>\Documents\maya
 - Mac: ~<username>/Library/Preferences/Autodesk/maya
+
+2. Create shelf button to run Python command:
+```
+import SceneExporter; SceneExporter.show()
+```
