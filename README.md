@@ -16,5 +16,12 @@ In this example scene we export a bookshelf full of books. There are multiple co
 
 ![Alt text](doc/images/example_maya.png?raw=true "Exporting in Maya")
 
+The Unity import tool imports the 2 fbx models and creates instances of each model according to the JSOS file.
 ![Alt text](doc/images/example_unity.png?raw=true "Importing in Unity")
-This Unity scene is made up of only 2 models.
+
+## Install
+
+Copy SceneExporter folder into your Maya app dir.
+
+- Windows: \Users\<username>\Documents\maya
+- Mac: ~<username>/Library/Preferences/Autodesk/maya
