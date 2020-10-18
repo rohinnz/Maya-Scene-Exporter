@@ -1,3 +1,8 @@
+"""
+Tool for exporting objects as FBX files with JSON info for scene transforms.
+
+Allows for scene to be built using repeatable objects in Maya with one click export.
+"""
 import json
 import logging
 
