@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'D:/Projects/MayaSceneExporter/Maya/SceneExporter/SceneExporterQWidget.ui'
 #
-# Created: Sun Oct 18 16:05:54 2020
+# Created: Mon Oct 19 22:59:36 2020
 #      by: pyside2-uic  running on PySide2 2.0.0~alpha0
 #
 # WARNING! All changes made in this file will be lost!
@@ -12,7 +12,7 @@ from PySide2 import QtCore, QtGui, QtWidgets
 class Ui_SceneExporter(object):
     def setupUi(self, SceneExporter):
         SceneExporter.setObjectName("SceneExporter")
-        SceneExporter.resize(595, 254)
+        SceneExporter.resize(595, 312)
         self.gridLayout = QtWidgets.QGridLayout(SceneExporter)
         self.gridLayout.setObjectName("gridLayout")
         self.groupBox = QtWidgets.QGroupBox(SceneExporter)
@@ -38,23 +38,31 @@ class Ui_SceneExporter(object):
         self.groupBox_2.setObjectName("groupBox_2")
         self.gridLayout_3 = QtWidgets.QGridLayout(self.groupBox_2)
         self.gridLayout_3.setObjectName("gridLayout_3")
-        self.label_6 = QtWidgets.QLabel(self.groupBox_2)
-        self.label_6.setObjectName("label_6")
-        self.gridLayout_3.addWidget(self.label_6, 1, 0, 1, 1)
-        self.json_dir_edit = QtWidgets.QLineEdit(self.groupBox_2)
-        self.json_dir_edit.setObjectName("json_dir_edit")
-        self.gridLayout_3.addWidget(self.json_dir_edit, 1, 1, 1, 1)
         self.fbx_dir_edit = QtWidgets.QLineEdit(self.groupBox_2)
         self.fbx_dir_edit.setObjectName("fbx_dir_edit")
-        self.gridLayout_3.addWidget(self.fbx_dir_edit, 0, 1, 1, 1)
+        self.gridLayout_3.addWidget(self.fbx_dir_edit, 1, 0, 1, 2)
+        self.label_6 = QtWidgets.QLabel(self.groupBox_2)
+        self.label_6.setObjectName("label_6")
+        self.gridLayout_3.addWidget(self.label_6, 2, 0, 1, 1)
+        self.label = QtWidgets.QLabel(self.groupBox_2)
+        self.label.setObjectName("label")
+        self.gridLayout_3.addWidget(self.label, 5, 0, 1, 2)
+        spacerItem = QtWidgets.QSpacerItem(20, 5, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Minimum)
+        self.gridLayout_3.addItem(spacerItem, 4, 0, 1, 1)
         self.label_5 = QtWidgets.QLabel(self.groupBox_2)
         self.label_5.setObjectName("label_5")
         self.gridLayout_3.addWidget(self.label_5, 0, 0, 1, 1)
-        self.label = QtWidgets.QLabel(self.groupBox_2)
-        self.label.setObjectName("label")
-        self.gridLayout_3.addWidget(self.label, 3, 0, 1, 2)
-        spacerItem = QtWidgets.QSpacerItem(20, 5, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Minimum)
-        self.gridLayout_3.addItem(spacerItem, 2, 0, 1, 1)
+        self.btn_browse_fbx_dir = QtWidgets.QPushButton(self.groupBox_2)
+        self.btn_browse_fbx_dir.setMaximumSize(QtCore.QSize(100, 16777215))
+        self.btn_browse_fbx_dir.setObjectName("btn_browse_fbx_dir")
+        self.gridLayout_3.addWidget(self.btn_browse_fbx_dir, 0, 1, 1, 1)
+        self.btn_browse_json_dir = QtWidgets.QPushButton(self.groupBox_2)
+        self.btn_browse_json_dir.setMaximumSize(QtCore.QSize(100, 16777215))
+        self.btn_browse_json_dir.setObjectName("btn_browse_json_dir")
+        self.gridLayout_3.addWidget(self.btn_browse_json_dir, 2, 1, 1, 1)
+        self.json_dir_edit = QtWidgets.QLineEdit(self.groupBox_2)
+        self.json_dir_edit.setObjectName("json_dir_edit")
+        self.gridLayout_3.addWidget(self.json_dir_edit, 3, 0, 1, 2)
         self.gridLayout.addWidget(self.groupBox_2, 3, 0, 1, 2)
         self.label_2 = QtWidgets.QLabel(SceneExporter)
         self.label_2.setObjectName("label_2")
@@ -78,8 +86,10 @@ class Ui_SceneExporter(object):
         self.btn_export_fbx_and_json.setText(QtWidgets.QApplication.translate("SceneExporter", "FBX and JSON", None, -1))
         self.groupBox_2.setTitle(QtWidgets.QApplication.translate("SceneExporter", "Settings", None, -1))
         self.label_6.setText(QtWidgets.QApplication.translate("SceneExporter", "JSON Export Folder:", None, -1))
-        self.label_5.setText(QtWidgets.QApplication.translate("SceneExporter", "FBX Export Folder:", None, -1))
         self.label.setText(QtWidgets.QApplication.translate("SceneExporter", "Settings are stored in scene node named SceneExporter.", None, -1))
+        self.label_5.setText(QtWidgets.QApplication.translate("SceneExporter", "FBX Export Folder:", None, -1))
+        self.btn_browse_fbx_dir.setText(QtWidgets.QApplication.translate("SceneExporter", "Browse", None, -1))
+        self.btn_browse_json_dir.setText(QtWidgets.QApplication.translate("SceneExporter", "Browse", None, -1))
         self.label_2.setText(QtWidgets.QApplication.translate("SceneExporter", "Exports objects in selected groups as FBX files with JSON file for group containing object transform information.", None, -1))
         self.label_3.setText(QtWidgets.QApplication.translate("SceneExporter", "When multiple objects share the same shape, only one FBX will be created.", None, -1))
 

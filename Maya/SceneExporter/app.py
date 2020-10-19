@@ -44,6 +44,9 @@ class SceneExporterApp(QtWidgets.QWidget):
 		self._ui.btn_export_fbx.clicked.connect(self._fbx_only_export_clicked)
 		self._ui.btn_export_json.clicked.connect(self._json_only_export_clicked)
 
+		self._ui.btn_browse_fbx_dir.clicked.connect(self._browse_fbx_dir_clicked)
+		self._ui.btn_browse_json_dir.clicked.connect(self._browse_json_dir_clicked)
+
 		# Finally show the app
 		self.show()
 
@@ -63,6 +66,21 @@ class SceneExporterApp(QtWidgets.QWidget):
 
 	def _fbx_only_export_clicked(self):
 		exporter.export_selected_groups(self._settings.fbx_dir, None)
+
+	def _browse_fbx_dir_clicked(self):
+		new_dir = self._show_dir_browser("Select FBX Export Directory", self._ui.fbx_dir_edit.text())
+		if new_dir:
+			self._ui.fbx_dir_edit.setText(new_dir)
+			self._on_fbx_dir_edited(new_dir)
+
+	def _browse_json_dir_clicked(self):
+		new_dir = self._show_dir_browser("Select JSON Export Directory", self._ui.json_dir_edit.text())
+		if new_dir:
+			self._ui.json_dir_edit.setText(new_dir)
+			self._on_json_dir_edited(new_dir)
+
+	def _show_dir_browser(self, title, existing_dir):
+		return QtWidgets.QFileDialog.getExistingDirectory(self, title, existing_dir, QtWidgets.QFileDialog.ShowDirsOnly | QtWidgets.QFileDialog.DontResolveSymlinks)
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Utils
