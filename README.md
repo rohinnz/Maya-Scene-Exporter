@@ -1,4 +1,5 @@
 # Maya Scene Exporter
+[![License](https://img.shields.io/github/license/pytransitions/transitions.svg)](LICENSE)
 
 ![Alt text](doc/images/tool_ui.png?raw=true "Maya Scene Exporter")
 
